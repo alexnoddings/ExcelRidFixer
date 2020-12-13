@@ -41,7 +41,7 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/ExcelRidFixer.zip /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/
     - name: Upload win-x86 Release
       uses: actions/upload-release-asset@v1
       env:
@@ -57,7 +57,7 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/ExcelRidFixer.zip /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/
     - name: Upload win-arm Release
       uses: actions/upload-release-asset@v1
       env:
@@ -73,7 +73,7 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/ExcelRidFixer.zip /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/
     - name: Upload linux-x64 Release
       uses: actions/upload-release-asset@v1
       env:
@@ -89,7 +89,7 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/ExcelRidFixer.zip /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/
     - name: Upload linux-arm Release
       uses: actions/upload-release-asset@v1
       env:
