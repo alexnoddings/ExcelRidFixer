@@ -23,8 +23,14 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Create win-x32 Release
-      run: dotnet publish -r win-x32 -p:PublishSingleFile=true --self-contained true
+    - name: Create win-x86 Release
+      run: dotnet publish -r win-x86 -p:PublishSingleFile=true --self-contained true
+    - name: Create win-arm Release
+      run: dotnet publish -r win-arm -p:PublishSingleFile=true --self-contained true
+    - name: Create linux-x64 Release
+      run: dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true
+    - name: Create linux-arm Release
+      run: dotnet publish -r linux-arm -p:PublishSingleFile=true --self-contained true
     - name: Create Github Release
       id: create_release
       uses: actions/create-release@v1
