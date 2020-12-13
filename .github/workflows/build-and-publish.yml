@@ -1,0 +1,84 @@
+name: .NET Core - Build and Publish
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+      
+    - name: Create Github Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Latest Release
+        body: Latest build of ${{ github.ref }}.
+        draft: false
+        prerelease: false
+      
+    - name: Create win-x86 Release
+      run: dotnet publish --configuration Release -r win-x86 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
+    - name: Upload win-x86 Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/publish/ExcelRidFixer.exe
+        asset_name: ExcelRidFixer-Win32.exe
+        asset_content_type: application/exe
+ 
+    - name: Create win-arm Release
+      run: dotnet publish --configuration Release -r win-arm --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
+    - name: Upload win-arm Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/publish/ExcelRidFixer.exe
+        asset_name: ExcelRidFixer-WinArm.exe
+        asset_content_type: application/zip
+      
+    - name: Create linux-x64 Release
+      run: dotnet publish --configuration Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
+    - name: Upload linux-x64 Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/publish/ExcelRidFixer
+        asset_name: ExcelRidFixer-Linux64
+        asset_content_type: application/zip
+      
+    - name: Create linux-arm Release
+      run: dotnet publish --configuration Release -r linux-arm --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
+    - name: Upload linux-arm Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/publish/ExcelRidFixer
+        asset_name: ExcelRidFixer-LinuxArm
+        asset_content_type: application/zip
+      
