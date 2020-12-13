@@ -41,14 +41,14 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-Win32.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/
     - name: Upload win-x86 Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/ExcelRidFixer.zip
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-Win32.zip
         asset_name: ExcelRidFixer-Win32.zip
         asset_content_type: application/zip
  
@@ -57,14 +57,14 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-WinArm.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/
     - name: Upload win-arm Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/ExcelRidFixer.zip
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-Linux64.zip
         asset_name: ExcelRidFixer-WinArm.zip
         asset_content_type: application/zip
       
@@ -73,14 +73,14 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-Linux64.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/
     - name: Upload linux-x64 Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/ExcelRidFixer.zip
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-Linux64.zip
         asset_name: ExcelRidFixer-Linux64.zip
         asset_content_type: application/zip
       
@@ -89,14 +89,14 @@ jobs:
     - name: Zip win-x86 Release
       uses: montudor/action-zip@v0.1.1
       with:
-        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/ExcelRidFixer.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/
+        args: zip -qq -r /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-LinuxArm.zip . - i /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/
     - name: Upload linux-arm Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/ExcelRidFixer.zip
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/ExcelRidFixer-LinuxArm.zip
         asset_name: ExcelRidFixer-LinuxArm.zip
         asset_content_type: application/zip
       
