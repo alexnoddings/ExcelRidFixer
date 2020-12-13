@@ -24,13 +24,13 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Create win-x86 Release
-      run: dotnet publish -r win-x86 -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish --configuration Release -r win-x86 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:PublishReadyToRun=true -p:IncludeNativeLibrariesForSelfExtract=true
     - name: Create win-arm Release
-      run: dotnet publish -r win-arm -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish --configuration Release -r win-arm --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
     - name: Create linux-x64 Release
-      run: dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish --configuration Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
     - name: Create linux-arm Release
-      run: dotnet publish -r linux-arm -p:PublishSingleFile=true --self-contained true
+      run: dotnet publish --configuration Release -r linux-arm --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -p:IncludeNativeLibrariesForSelfExtract=true
     - name: Create Github Release
       id: create_release
       uses: actions/create-release@v1
@@ -38,7 +38,43 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: Latest build.
+        release_name: Latest Release
+        body: Latest build of ${{ github.ref }}.
         draft: false
         prerelease: false
+    - name: Upload win-x86 Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-x86/ExcelRidFixer.exe
+        asset_name: ExcelRidFixer-Win32.exe
+        asset_content_type: application/exe
+    - name: Upload win-arm Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/win-arm/ExcelRidFixer.exe
+        asset_name: ExcelRidFixer-WinArm.exe
+        asset_content_type: application/exe
+    - name: Upload linux-x64 Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-x64/ExcelRidFixer
+        asset_name: ExcelRidFixer-Linux64
+        asset_content_type: application/exe
+    - name: Upload linux-arm Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: /home/runner/work/ExcelRidFixer/ExcelRidFixer/bin/Release/net5.0/linux-arm/ExcelRidFixer
+        asset_name: ExcelRidFixer-LinuxArm
+        asset_content_type: application/exe
